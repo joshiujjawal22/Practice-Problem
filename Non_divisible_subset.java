@@ -19,26 +19,19 @@ class Result {
 
     public static int nonDivisibleSubset(int k, List<Integer> s) {
         
-    //     int max=0;
-    // for(int i=0;i<s.size()-1;i++)
-    // {   Set<Integer> a = new HashSet<Integer>();
-    //     for(int j=i+1;j<s.size();j++)
-    //     {   
-    //         if((s.get(i)+s.get(j))%k!=0) {
-    //             a.add(s.get(i));
-    //             int c=0;
-    //             Iterator<Integer> it=a.iterator();
-    //             while(it.hasNext())  
-    //             {
-    //                 if((it.next()+s.get(j))%k!=0) c++;
-    //                 if(c==a.size()) a.add(s.get(j));
-    //             }
-    //                 } 
-    //         if(max<a.size()) max=a.size();
-    //     }
-    // }
-    // return max;
-    // }
+    
+    int result=0;
+    int a[]=new int[k];
+    for(int i=0;i<s.size();i++){
+        a[s.get(i)%k]++;
+    }
+    if(k%2==0) a[k/2]=Math.min(a[k/2],1);
+    result+=Math.min(a[0],1);
+    for(int i=1;i<=k/2;i++){
+        result+=Math.max(a[i],a[k-i]);
+    }
+    return result;
+    }
 }
 
 public class Solution {
